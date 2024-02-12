@@ -5,12 +5,12 @@
 # Author: [Ala Alsanea]
 # Date: [12-FEB-2024]
 ------
-# Requairment
-    - ## dotnet 6
+## Requairment
+    -dotnet 6
 
 ------------
-# Usage:
-    - Dependency setup
+## Usage:
+    -Dependency setup
 ```
 dotnet add package Microsoft.EntityFrameworkCore --version 6.0.2 
 dotnet add package Microsoft.EntityFrameworkCore.Tools --version 6.0.2
@@ -22,7 +22,7 @@ dotnet tool install --global dotnet-ef
 dotnet add package AutoMapper --version 13.0.1
 dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 12.0.1
 ```
-    - run test to use `swagger`
+    -run test to use `swagger`
 ```
 dotnet watch run
 ```
