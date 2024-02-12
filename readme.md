@@ -22,7 +22,7 @@ dotnet tool install --global dotnet-ef
 dotnet add package AutoMapper --version 13.0.1
 dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 12.0.1
 ```
-    - run 
+    - run test to use `swagger`
 ```
 dotnet watch run
 ```
