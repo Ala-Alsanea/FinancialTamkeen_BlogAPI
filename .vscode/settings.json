@@ -1,0 +1,26 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 1433,
+            "driver": "MSSQL",
+            "name": "sqlsrvr",
+            "database": "default",
+            "username": "SA",
+            "password": "1234@Pass"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "mydatabase.db",
+            "database": "${workspaceFolder:FinancialTamkeen_BlogAPI}/mydatabase.db"
+        }
+    ]
+}

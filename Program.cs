@@ -1,23 +1,42 @@
 using System.Text;
 using FinancialTamkeen_BlogAPI.Data;
 using FinancialTamkeen_BlogAPI.interfaces.Repositories;
+using FinancialTamkeen_BlogAPI.Models;
 using FinancialTamkeen_BlogAPI.Repositories;
+using FinancialTamkeen_BlogAPI.Repositories.interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<DataContext>(options =>options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Add configuration from appsettings.json
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-// auth
+builder.Services.AddTransient<IUserAuthenticationRepository, UserAuthenticationRepository>();
+
+builder.Services.AddAuthentication();
+
+builder.Services.AddIdentity<User, IdentityRole>(
+    o =>
+    {
+        o.Password.RequireDigit = false;
+        o.Password.RequireLowercase = false;
+        o.Password.RequireUppercase = false;
+        o.Password.RequireNonAlphanumeric = false;
+    }
+).AddEntityFrameworkStores<DataContext>()
+.AddDefaultTokenProviders();
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -25,21 +44,56 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(o =>
 {
+    var jwtConfig = builder.Configuration.GetSection("Jwt");
+    Console.WriteLine("JWT {0}",jwtConfig["Key"]);
     o.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+        ValidIssuer = jwtConfig["Issuer"],
+        ValidAudience = jwtConfig["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig["Key"])),
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidateLifetime = false,
+        ValidateLifetime = true,
         ValidateIssuerSigningKey = true
     };
 });
+
 builder.Services.AddAuthorization();
-// Add configuration from appsettings.json
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddEnvironmentVariables();
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+
+    c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme."
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] {}
+                }
+    });
+});
+builder.Services.AddSwaggerGen();
+
+
 
 var app = builder.Build();
 
@@ -52,9 +106,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
-IConfiguration configuration = app.Configuration;
-IWebHostEnvironment environment = app.Environment;
 
 app.MapControllers();
 

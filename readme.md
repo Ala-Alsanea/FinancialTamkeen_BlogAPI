@@ -1,16 +1,16 @@
+## The practical exam "FinancialTamkeen_BlogAPI"
 
-## This code is part of the project "FinancialTamkeen_BlogAPI".
-## It performs a specific task related to the project.
+* Author: Ala Alsanea
+* Date: 12-FEB-2024
 
-# Author: [Ala Alsanea]
-# Date: [12-FEB-2024]
-------
 ## Requairment
-    -dotnet 6
 
-------------
+* dotnet 6
+
 ## Usage:
-    -Dependency setup
+
+* Dependency setup
+
 ```
 dotnet add package Microsoft.EntityFrameworkCore --version 6.0.2 
 dotnet add package Microsoft.EntityFrameworkCore.Tools --version 6.0.2
@@ -19,37 +19,41 @@ dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 6.0.2
 
 dotnet tool install --global dotnet-ef
 
-dotnet add package AutoMapper --version 13.0.1
+dotnet add package AutoMapper --version 12.0.1
 dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 12.0.1
 ```
-    -run test to use `swagger`
+
+* run test to use `swagger or postman`
+
 ```
 dotnet watch run
 ```
+
 # endpoints:
 
-    - api/Product/all
-        return all products
+* ### User (Auth)
+  * `Post` api/user/login
+    * "userName": "string"
+    * "password": "string"
+   
+  * `Post` api/user/signup
+    - "userName": "string"
+    - "password": "string"
+    - "email": "string"
+    - "phoneNumber": "string"
+  
+* ### Product
+  * `Get` api/Product/all `return all products`
+  * `Get` api/Product/{id}: `return a single product by id`
+  * `Post` api/Product/createit: `create product with following keys:`
 
-    - api/Product/{id}
-        return a single product by id
+    - "name": string,
+    - "description": string,
+    - "price": decimal,
+    - "quantityInStock": int
 
-    - api/Product/create
-        it create product with following keys:
-            - "name": string,
-            - "description": string,
-            - "price": decimal,
-            - "quantityInStock": int
-
-    - api/Product/{id}/update
-        it update a single product with following keys:
-            - "name": string,
-            - "description": string,
-            - "price": decimal,
-            - "quantityInStock": int
-
-
-
-
-
-
+  * `Put` api/Product/{id}/update: `it update a single product with following keys:`
+    - "name": string,
+    - "description": string,
+    - "price": decimal,
+    - "quantityInStock": int

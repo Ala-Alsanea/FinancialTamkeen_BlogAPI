@@ -2,31 +2,36 @@ using AutoMapper;
 using FinancialTamkeen_BlogAPI.Dto;
 using FinancialTamkeen_BlogAPI.interfaces.Repositories;
 using FinancialTamkeen_BlogAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace FinancialTamkeen_BlogAPI.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository productRepository;
         private readonly IMapper mapper;
+        private readonly IConfiguration configuration;
 
-        public ProductController(IProductRepository productRepository,IMapper mapper)
+        public ProductController(IProductRepository productRepository,IMapper mapper,IConfiguration configuration)
         {
             this.productRepository = productRepository;
             this.mapper = mapper;
+            this.configuration = configuration;
         }
 
         [HttpGet("all")]
         public ActionResult ListAllProducts()
         {
+            // return Ok(this.configuration.GetSection("Jwt")["Key"]);
 
             var Products = this.productRepository.All();
 
-            if(Products == null)
+            if(!Products.Any())
                 return NotFound();
 
             if (!ModelState.IsValid)

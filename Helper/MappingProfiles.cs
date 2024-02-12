@@ -10,6 +10,7 @@ namespace PokemonReviewApp.Helper
         {
             CreateMap<Product, ProductDto>();
             CreateMap<ProductDto,Product>();
+            CreateMap<UserRegistrationDto, User>();
 
         }
     }
