@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using FinancialTamkeen_BlogAPI.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using FinancialTamkeen_BlogAPI.Domain.Models;
 
-namespace FinancialTamkeen_BlogAPI.Data
+namespace FinancialTamkeen_BlogAPI.Domain.Data
 {
     public class DataContext : IdentityDbContext<User>
     {

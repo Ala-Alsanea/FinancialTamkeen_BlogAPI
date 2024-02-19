@@ -1,6 +1,7 @@
-using FinancialTamkeen_BlogAPI.Models;
 
-namespace FinancialTamkeen_BlogAPI.interfaces.Repositories
+using FinancialTamkeen_BlogAPI.Domain.Models;
+
+namespace FinancialTamkeen_BlogAPI.Domain.Repositories.interfaces
 {
     public interface IProductRepository
     {

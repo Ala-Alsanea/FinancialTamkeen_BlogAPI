@@ -1,8 +1,8 @@
 using AutoMapper;
+using FinancialTamkeen_BlogAPI.Domain.Models;
 using FinancialTamkeen_BlogAPI.Dto;
-using FinancialTamkeen_BlogAPI.Models;
 
-namespace PokemonReviewApp.Helper
+namespace PokemonReviewApp.App.Helper
 {
     public class MappingProfiles : Profile
     {

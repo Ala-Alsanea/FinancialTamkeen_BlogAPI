@@ -1,8 +1,10 @@
-using FinancialTamkeen_BlogAPI.Data;
-using FinancialTamkeen_BlogAPI.interfaces.Repositories;
-using FinancialTamkeen_BlogAPI.Models;
 
-namespace FinancialTamkeen_BlogAPI.Repositories
+
+using FinancialTamkeen_BlogAPI.Domain.Data;
+using FinancialTamkeen_BlogAPI.Domain.Models;
+using FinancialTamkeen_BlogAPI.Domain.Repositories.interfaces;
+
+namespace FinancialTamkeen_BlogAPI.Domain.Repositories
 {
     public class ProductRepository : IProductRepository
     {

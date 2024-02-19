@@ -1,4 +1,4 @@
-namespace FinancialTamkeen_BlogAPI.Models
+namespace FinancialTamkeen_BlogAPI.Domain.Models
 {
     public class Product
     {

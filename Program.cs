@@ -1,9 +1,8 @@
 using System.Text;
-using FinancialTamkeen_BlogAPI.Data;
-using FinancialTamkeen_BlogAPI.interfaces.Repositories;
-using FinancialTamkeen_BlogAPI.Models;
-using FinancialTamkeen_BlogAPI.Repositories;
-using FinancialTamkeen_BlogAPI.Repositories.interfaces;
+using FinancialTamkeen_BlogAPI.Domain.Data;
+using FinancialTamkeen_BlogAPI.Domain.Models;
+using FinancialTamkeen_BlogAPI.Domain.Repositories;
+using FinancialTamkeen_BlogAPI.Domain.Repositories.interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

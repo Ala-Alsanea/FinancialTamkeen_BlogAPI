@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FinancialTamkeen_BlogAPI.Domain.Repositories.interfaces;
 using FinancialTamkeen_BlogAPI.Dto;
-using FinancialTamkeen_BlogAPI.Repositories.interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinancialTamkeen_BlogAPI.Controllers
+namespace FinancialTamkeen_BlogAPI.Presentaion.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

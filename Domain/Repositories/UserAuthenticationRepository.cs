@@ -7,12 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using FinancialTamkeen_BlogAPI.Dto;
-using FinancialTamkeen_BlogAPI.Models;
-using FinancialTamkeen_BlogAPI.Repositories.interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using FinancialTamkeen_BlogAPI.Domain.Data;
+using FinancialTamkeen_BlogAPI.Domain.Models;
+using FinancialTamkeen_BlogAPI.Domain.Repositories.interfaces;
 
-namespace FinancialTamkeen_BlogAPI.Repositories
+namespace FinancialTamkeen_BlogAPI.Domain.Repositories
 {
     public class UserAuthenticationRepository : IUserAuthenticationRepository
     {

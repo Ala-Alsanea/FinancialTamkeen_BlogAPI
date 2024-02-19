@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FinancialTamkeen_BlogAPI.Dto;
-using FinancialTamkeen_BlogAPI.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace FinancialTamkeen_BlogAPI.Repositories.interfaces
+namespace FinancialTamkeen_BlogAPI.Domain.Repositories.interfaces
 {
     public interface IUserAuthenticationRepository
     {

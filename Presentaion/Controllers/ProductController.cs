@@ -1,12 +1,13 @@
 using AutoMapper;
+using FinancialTamkeen_BlogAPI.Domain.Models;
+using FinancialTamkeen_BlogAPI.Domain.Repositories.interfaces;
 using FinancialTamkeen_BlogAPI.Dto;
-using FinancialTamkeen_BlogAPI.interfaces.Repositories;
-using FinancialTamkeen_BlogAPI.Models;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace FinancialTamkeen_BlogAPI.Controllers
+namespace FinancialTamkeen_BlogAPI.Presentaion.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
