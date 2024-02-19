@@ -8,7 +8,7 @@ namespace FinancialTamkeen_BlogAPI.interfaces.Repositories
         ICollection<Product> All();
         Product GetById(int id);
         bool Create(Product product);
-        bool Update(int id,Product product);
+        bool Update(Product product);
 
 
     }

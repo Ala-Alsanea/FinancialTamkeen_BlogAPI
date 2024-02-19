@@ -81,14 +81,18 @@ namespace FinancialTamkeen_BlogAPI.Controllers
                 return BadRequest(ModelState);
 
             if (!this.productRepository.ProductExists(id))
+                return BadRequest();
+
+            if (!this.productRepository.ProductExists(id))
                 return NotFound();
 
             if (!ModelState.IsValid)
                 return BadRequest();
 
             var productMap = this.mapper.Map<Product>(dto);
+            productMap.ProductId = id;
 
-            if (!this.productRepository.Update(id,productMap))
+            if (!this.productRepository.Update(productMap))
             {
                 ModelState.AddModelError("", "Something went wrong updating category");
                 return StatusCode(500, ModelState);

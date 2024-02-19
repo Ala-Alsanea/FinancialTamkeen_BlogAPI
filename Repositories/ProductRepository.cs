@@ -33,20 +33,10 @@ namespace FinancialTamkeen_BlogAPI.Repositories
         }
 
 
-        public bool Update(int id,Product product)
+        public bool Update(Product product)
         {
-            var existingProduct = this.context.Products.Find(id);
-            if (existingProduct != null)
-            {
-                existingProduct.Name = product.Name;
-                existingProduct.Price = product.Price;
-                existingProduct.Description = product.Description;
-                existingProduct.QuantityInStock = product.QuantityInStock ;
-                // Update other properties as needed
-                this.context.Products.Update(existingProduct);
-                return this.context.SaveChanges() > 0;
-            }
-            return false;
+            this.context.Update(product);
+            return this.context.SaveChanges() > 0 ? true : false;
         }
     }
 }

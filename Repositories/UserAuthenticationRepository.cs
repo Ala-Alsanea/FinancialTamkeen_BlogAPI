@@ -21,7 +21,7 @@ namespace FinancialTamkeen_BlogAPI.Repositories
         private readonly IConfiguration _configuration;
         private User? _user;
 
-        public UserAuthenticationRepository(UserManager<User> userManager, IMapper mapper,IConfiguration configuration)
+        public UserAuthenticationRepository(UserManager<User> userManager, IMapper mapper, IConfiguration configuration)
         {
             this.userManager = userManager;
             this.mapper = mapper;
@@ -61,9 +61,9 @@ namespace FinancialTamkeen_BlogAPI.Repositories
         private async Task<List<Claim>> GetClaims()
         {
             var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, _user.UserName)
-        };
+                {
+                    new Claim(ClaimTypes.Name, _user.UserName)
+                };
             var roles = await this.userManager.GetRolesAsync(_user);
             foreach (var role in roles)
             {
@@ -80,7 +80,7 @@ namespace FinancialTamkeen_BlogAPI.Repositories
             issuer: jwtSettings["Issuer"],
             audience: jwtSettings["Audience"],
             claims: claims,
-            expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expiresIn"])),
+            // expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expiresIn"])),
             signingCredentials: signingCredentials
             );
             return tokenOptions;
